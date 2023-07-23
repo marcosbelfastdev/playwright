@@ -4,63 +4,67 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>jagacy-cucumber-bdd-example</artifactId>
-    <name>Jagacy Cucumber BDD Example</name>
+    <groupId>com.github.marcosbelfastdev</groupId>
+    <artifactId>playwright</artifactId>
+    <name>My Playwright practice</name>
     <version>1.0-SNAPSHOT</version>
 
     <developers>
         <developer>
-            <name>Unmesh Gundecha</name>
-            <email>upgundecha@gmail.com</email>
+            <name>Marcos Ghiraldelli</name>
+            <email>ghiraldelli@fake.com</email>
         </developer>
     </developers>
 
     <properties>
-        <java.version>1.7</java.version>
+        <java.version>17</java.version>
         <junit.version>4.12</junit.version>
         <cucumber.version>1.2.4</cucumber.version>
-        <maven.compiler.version>3.3</maven.compiler.version>
+        <maven.compiler.version>3.8.1</maven.compiler.version>
         <commons.lang3.version>3.4</commons.lang3.version>
         <jagacy.version>4.2.3</jagacy.version>
     </properties>
 
     <dependencies>
+        <!-- Cucumber dependencies -->
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>${cucumber.version}</version>
-            <scope>test</scope>
+            <version>7.2.3</version>
         </dependency>
-
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>${cucumber.version}</version>
+            <version>7.2.3</version>
             <scope>test</scope>
         </dependency>
 
+        <!-- JUnit 4 dependencies (Choose one of the two options below) -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons.lang3.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>jagacy3270</groupId>
-            <artifactId>jagacy3270</artifactId>
-            <version>${jagacy.version}</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/test/resources/lib/jagacy3270.jar</systemPath>
-        </dependency>
+<!--        &lt;!&ndash; JUnit 5 dependencies (Choose one of the two options below) &ndash;&gt;-->
+<!--        &lt;!&ndash; Option 1: JUnit Jupiter API &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.junit.jupiter</groupId>-->
+<!--            <artifactId>junit-jupiter-api</artifactId>-->
+<!--            <version>5.8.0</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; Option 2: JUnit Vintage Engine (to run JUnit 4 tests on JUnit 5 platform) &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.junit.vintage</groupId>-->
+<!--            <artifactId>junit-vintage-engine</artifactId>-->
+<!--            <version>5.8.0</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
     </dependencies>
+
+
 
     <build>
         <plugins>
