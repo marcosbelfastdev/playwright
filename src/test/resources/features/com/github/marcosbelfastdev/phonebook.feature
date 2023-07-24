@@ -1,5 +1,6 @@
 Feature: Phonebook
 
   @dev
-  Scenario: Search faculty phone number using name
-    Given I start a new emulator session
+  Scenario: Sample
+    Given I start the standard browser
+    And navigate to home page
