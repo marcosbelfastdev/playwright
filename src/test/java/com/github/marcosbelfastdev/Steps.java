@@ -40,9 +40,9 @@ public class Steps {
                 app.newBrowser("chromium", new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(50)
                 )
         );
-        app.switchToContext("default");
+        //app.switchToContext("default");
         app.newPage("default");
-        app.switchToPage("default");
+        //app.switchToPage("default");
     }
 
     @Given("^I start the browser named as (.*)$")
@@ -58,12 +58,12 @@ public class Steps {
                 app.newBrowser("chromium", new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(50)
                 )
         );
-        app.switchToContext(browserName);
+        //app.switchToContext(browserName);
         app.newPage("default");
-        app.switchToPage("default");
+        //app.switchToPage("default");
     }
 
-    @Given("^I start the browser")
+    @Given("^I start a named browser of type")
     public void startNamedBrowserInstance(DataTable table) {
 
         String browserName;

@@ -24,12 +24,15 @@ public class PageWrapper {
         }
     }
 
-    public void newPage(String name) {
+    public Page newPage(String name) {
+        Page page = null;
         try {
-            pageMap.put(name, context.newPage());
+            page = context.newPage();
+            pageMap.put(name, page);
         } catch (Exception e) {
             fail("A page with this name already exists.");
         }
+        return page;
     }
 
    public Page page(String name) {

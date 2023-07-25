@@ -67,7 +67,7 @@ public class AppController {
         browserMap.putIfAbsent(browserType, browser);
         if (isNull(this.browser))
             this.browser = browser;
-        return browser;
+        return this.browser;
     }
 
     public boolean isBrowserInstanceStarted(String browserType) {
@@ -92,7 +92,9 @@ public class AppController {
 
     public void newContext(String name, Browser browser) {
         try {
-            contextMap.put(name, browser.newContext());
+            BrowserContext context = browser.newContext();
+            contextMap.put(name, context);
+            this.context = context;
         } catch (Exception e) {
             fail("Context exists already.");
         }
@@ -121,7 +123,7 @@ public class AppController {
         if (isNull(page)) {
             try {
                 PageWrapper pageWrapper = new PageWrapper(context);
-                pageWrapper.newPage(name);
+                this.page = pageWrapper.newPage(name);
                 pageWrapperMap.put(context, pageWrapper);
                 //pageWrapperMap.get(context).newPage(name);
                 return;
