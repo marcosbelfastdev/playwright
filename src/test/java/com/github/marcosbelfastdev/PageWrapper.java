@@ -3,13 +3,14 @@ package com.github.marcosbelfastdev;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.fail;
 
 public class PageWrapper {
     BrowserContext context;
-    Map<String, Page> pageMap;
+    Map<String, Page> pageMap = new HashMap<>();
 
     public PageWrapper(BrowserContext context) {
         this.context = context;

@@ -14,9 +14,9 @@ public class AppController {
     private BrowserContext context;
     private Page page;
 
-    private Map<String, Browser> browserMap;
+    private Map<String, Browser> browserMap = new HashMap<>();
     private Map<String, BrowserContext> contextMap = new HashMap<>();
-    private Map<BrowserContext, PageWrapper> pageWrapperMap;
+    private Map<BrowserContext, PageWrapper> pageWrapperMap = new HashMap<>();
 
 
     public Playwright playwright() {
@@ -26,8 +26,6 @@ public class AppController {
     public void setPlaywright(Playwright playwright) {
         if (isNull(this.playwright))
             this.playwright = playwright;
-        else
-            fail("The playwright object had been set before.");
     }
 
     public Browser browser() {
@@ -48,7 +46,7 @@ public class AppController {
         return browser;
     }
 
-    public void newBrowser(String browserType, BrowserType.LaunchOptions launchOptions) {
+    public Browser newBrowser(String browserType, BrowserType.LaunchOptions launchOptions) {
         Browser browser = null;
         switch (browserType) {
             case "chromium":
@@ -69,6 +67,7 @@ public class AppController {
         browserMap.putIfAbsent(browserType, browser);
         if (isNull(this.browser))
             this.browser = browser;
+        return browser;
     }
 
     public boolean isBrowserInstanceStarted(String browserType) {
@@ -91,9 +90,9 @@ public class AppController {
         }
     }
 
-    public void newContext(String name) {
+    public void newContext(String name, Browser browser) {
         try {
-            contextMap.put(name, this.browser.newContext());
+            contextMap.put(name, browser.newContext());
         } catch (Exception e) {
             fail("Context exists already.");
         }
@@ -112,15 +111,19 @@ public class AppController {
     }
 
     public void newPage(String name) {
+        Page page = null;
         try {
-            Page page = pageWrapperMap.get(context).page(name);
+            page = pageWrapperMap.get(context).page(name);
         } catch (Exception e) {
 
         }
 
         if (isNull(page)) {
             try {
-                pageWrapperMap.get(context).newPage(name);
+                PageWrapper pageWrapper = new PageWrapper(context);
+                pageWrapper.newPage(name);
+                pageWrapperMap.put(context, pageWrapper);
+                //pageWrapperMap.get(context).newPage(name);
                 return;
             } catch (Exception e) {
                 fail("Error trying to add a new page");
