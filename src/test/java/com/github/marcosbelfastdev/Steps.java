@@ -55,7 +55,7 @@ public class Steps {
         launchOptions.setArgs(args);
         //app.setPlaywright(playwright);
         app.newContext(browserName,
-                app.newBrowser("chromium", new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(50)
+                app.newBrowser("chromium", launchOptions
                 )
         );
         //app.switchToContext(browserName);
@@ -80,52 +80,42 @@ public class Steps {
             browserName = table.cell(0,0);
         }
 
-        Assert.assertNotNull(app.playwright());
+        //Assert.assertNotNull(app.playwright());
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions();
         List<String> args = new ArrayList<>();
         args.add("--disable-web-security");
         args.add("--disable-features=IsolateOrigins,site-per-process");
         launchOptions.setArgs(args);
-        app.setPlaywright(playwright);
+        if (browserType.equals("firefox"))
+            launchOptions = null;
+        //app.setPlaywright(playwright);
         app.newContext(browserName,
                 app.newBrowser(
                         browserType,
-                        new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(50)
+                        launchOptions
                 )
         );
-        app.switchToContext(browserName);
-        app.newPage("standard");
-        app.switchToPage("standard");
+        //app.switchToContext(browserName);
+        app.newPage("default");
+        //app.switchToPage("default");
     }
-
-//    @And("^navigate to home page$")
-//    public void navigateToHomePage() {
-//        app.page().navigate("http://www.cnn.com.br/");
-//    }
 
     @And("navigate to (.*)$")
     public void navigateToUrl(String url) {
         app.page().navigate(url);
     }
 
-    @And("ˆswitch to the standard browser")
+    @And("switch to the standard browser")
     public void switchToBrowser() {
-        app.switchToContext("standard");
-        app.switchToPage("standard");
+        app.switchToContext("default");
+        app.switchToPage("default");
         app.page().navigate("http://theguardian.co.uk/");
     }
-
-//    @And("Switch to browser named as (.*)$")
-//    public void switchToNamedBrowser(String browserName) {
-//        app.switchToContext(browserName);
-//        app.switchToPage("standard");
-//        app.page().navigate("http://theguardian.co.uk/");
-//    }
 
     @And("switch to browser named as (.*)$")
     public void switchToBrowserNamedAs(String browserName) {
         app.switchToContext(browserName);
-        app.switchToPage("standard");
+        app.switchToPage("default");
         //app.page().navigate("http://theguardian.co.uk/");
     }
 
@@ -136,6 +126,13 @@ public class Steps {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @And("switch to named browser (.*)")
+    public void switchToNamedBrowserFourth(String browserName) {
+        app.switchToContext(browserName);
+        app.switchToPage("default");
+        app.page().navigate("http://www.firefox.org");
     }
 }
 

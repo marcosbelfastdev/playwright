@@ -52,21 +52,19 @@ public class AppController {
             case "chromium":
                 if (!isBrowserInstanceStarted(browserType))
                     browser = playwright().chromium().launch(launchOptions);
-                else {
-                    this.browser = browser(browserType);
-                }
                 break;
             case "firefox"  :
-                if (!isBrowserInstanceStarted(browserType))
+                if (!isBrowserInstanceStarted(browserType)) {
+                    if (launchOptions == null) {
+                        launchOptions = new BrowserType.LaunchOptions();
+                        launchOptions.setHeadless(false);
+                    }
                     browser = playwright().firefox().launch(launchOptions);
-                else {
-                    this.browser = browser(browserType);
                 }
                 break;
         }
         browserMap.putIfAbsent(browserType, browser);
-        if (isNull(this.browser))
-            this.browser = browser;
+        this.browser = browser(browserType);
         return this.browser;
     }
 
