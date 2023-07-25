@@ -2,10 +2,7 @@ package com.github.marcosbelfastdev;
 
 import com.microsoft.playwright.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.Objects.isNull;
 import static org.junit.Assert.fail;
@@ -13,11 +10,14 @@ import static org.junit.Assert.fail;
 public class AppController {
 
     private Playwright playwright;
-    private Map<BrowserType, Browser> browserMap;
-    private ContextController contextController = new ContextController();
-    private PageController pageController = new PageController();
-
     private Browser browser;
+    private BrowserContext context;
+    private Page page;
+
+    private Map<String, Browser> browserMap;
+    private Map<String, BrowserContext> contextMap = new HashMap<>();
+    private Map<BrowserContext, PageWrapper> pageWrapperMap;
+
 
     public Playwright playwright() {
         return playwright;
@@ -34,48 +34,108 @@ public class AppController {
         return browser;
     }
 
-    public Browser getBrowser(BrowserType browserType) {
-        return browserMap.get(browserType);
+    public BrowserContext context() {
+        return context();
     }
 
-    public void addBrowser(Browser browser) {
-        browserMap.putIfAbsent(browser.browserType(), browser);
+    public Browser browser(String browserType) {
+        Browser browser = null;
+        try {
+            browser = browserMap.get(browserType);
+        } catch (Exception e) {
+            fail("No " + browserType + " browser has been instantiated yet.");
+        }
+        return browser;
+    }
+
+    public void newBrowser(String browserType, BrowserType.LaunchOptions launchOptions) {
+        Browser browser = null;
+        switch (browserType) {
+            case "chromium":
+                if (!isBrowserInstanceStarted(browserType))
+                    browser = playwright().chromium().launch(launchOptions);
+                else {
+                    this.browser = browser(browserType);
+                }
+                break;
+            case "firefox"  :
+                if (!isBrowserInstanceStarted(browserType))
+                    browser = playwright().firefox().launch(launchOptions);
+                else {
+                    this.browser = browser(browserType);
+                }
+                break;
+        }
+        browserMap.putIfAbsent(browserType, browser);
         if (isNull(this.browser))
             this.browser = browser;
-        else
-            fail("The browser was set already.");
     }
 
-    public BrowserContext context() {
-        return contextController.context();
+    public boolean isBrowserInstanceStarted(String browserType) {
+        Browser browser = null;
+        try {
+            browser = browserMap.get(browserType);
+        } catch (Exception e) {
+
+        }
+        if (isNull(browser))
+            return false;
+        return true;
     }
 
     public void addContext(String name, BrowserContext context) {
-        contextController.addContext(name, context);
+        try {
+            contextMap.put(name, context);
+        } catch (Exception e) {
+            fail("Context exists already.");
+        }
     }
 
-    public void newContext(String name, Browser browser) {
-        contextController.newContext(name, browser);
+    public void newContext(String name) {
+        try {
+            contextMap.put(name, this.browser.newContext());
+        } catch (Exception e) {
+            fail("Context exists already.");
+        }
     }
 
     public void switchToContext(String name) {
-        contextController.switchTo(name);
+        try {
+            this.context = contextMap.get(name);
+        } catch (Exception e) {
+            fail("Unknown context.");
+        }
     }
 
     public Page page() {
-        return pageController.page();
+        return this.page;
+    }
+
+    public void newPage(String name) {
+        try {
+            Page page = pageWrapperMap.get(context).page(name);
+        } catch (Exception e) {
+
+        }
+
+        if (isNull(page)) {
+            try {
+                pageWrapperMap.get(context).newPage(name);
+                return;
+            } catch (Exception e) {
+                fail("Error trying to add a new page");
+            }
+        }
+
+        fail("A page with this name already exists.");
     }
 
     public void addPage(String name, Page page) {
-       pageController.addPage(name, page);
-    }
-
-    public void newPage(String name, BrowserContext context) {
-        pageController.newPage(name, context);
+        pageWrapperMap.get(context).addPage(name, page);
     }
 
     public void switchToPage(String name) {
-        pageController.switchTo(name);
+        this.page = pageWrapperMap.get(context).page(name);
     }
 
 }
