@@ -1,5 +1,6 @@
-package com.github.marcosbelfastdev;
+package base;
 
+import base.PageWrapper;
 import com.microsoft.playwright.*;
 
 import java.util.*;

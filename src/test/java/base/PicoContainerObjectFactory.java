@@ -1,8 +1,9 @@
-package com.github.marcosbelfastdev;
+package base;
 
 import io.cucumber.core.backend.ObjectFactory;
 import org.picocontainer.DefaultPicoContainer;
 import org.picocontainer.MutablePicoContainer;
+import steps.Steps;
 
 public class PicoContainerObjectFactory implements ObjectFactory {
     private final MutablePicoContainer container = new DefaultPicoContainer();

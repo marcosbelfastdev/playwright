@@ -1,4 +1,4 @@
-package com.github.marcosbelfastdev;
+package base;
 
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;

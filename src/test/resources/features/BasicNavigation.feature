@@ -24,7 +24,8 @@ Feature: Phonebook
     And switch to the standard browser
     And navigate to http://www.bbc.co.uk
     #And switch to named browser Fourth
+    And navigate to http://www.microsoft.com
     #And alternate to default browser
     #And alternate to the browser named
-    And wait 100000
+    And wait 10000
 

@@ -1,5 +1,6 @@
-package com.github.marcosbelfastdev;
+package steps;
 
+import base.AppController;
 import com.microsoft.playwright.*;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -8,8 +9,6 @@ import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Objects.isNull;
 
 public class Steps {
 
@@ -40,9 +39,7 @@ public class Steps {
                 app.newBrowser("chromium", new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(50)
                 )
         );
-        //app.switchToContext("default");
         app.newPage("default");
-        //app.switchToPage("default");
     }
 
     @Given("^I start the browser named as (.*)$")
@@ -58,9 +55,7 @@ public class Steps {
                 app.newBrowser("chromium", launchOptions
                 )
         );
-        //app.switchToContext(browserName);
         app.newPage("default");
-        //app.switchToPage("default");
     }
 
     @Given("^I start a named browser of type")
@@ -88,16 +83,13 @@ public class Steps {
         launchOptions.setArgs(args);
         if (browserType.equals("firefox"))
             launchOptions = null;
-        //app.setPlaywright(playwright);
         app.newContext(browserName,
                 app.newBrowser(
                         browserType,
                         launchOptions
                 )
         );
-        //app.switchToContext(browserName);
         app.newPage("default");
-        //app.switchToPage("default");
     }
 
     @And("navigate to (.*)$")
@@ -116,7 +108,6 @@ public class Steps {
     public void switchToBrowserNamedAs(String browserName) {
         app.switchToContext(browserName);
         app.switchToPage("default");
-        //app.page().navigate("http://theguardian.co.uk/");
     }
 
     @And("wait {int}")
