@@ -1,6 +1,6 @@
-package steps;
+package steps.appControllerModel;
 
-import base.AppController;
+import base.appControllerModel.AppController;
 import com.microsoft.playwright.*;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -10,7 +10,7 @@ import org.junit.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Steps {
+public class StepsAppControllerModel {
 
     AppController app;
 
@@ -19,7 +19,7 @@ public class Steps {
     Page page;
     BrowserContext context;
 
-    public Steps(AppController app) {
+    public StepsAppControllerModel(AppController app) {
         this.app = app;
     }
 

@@ -1,6 +1,5 @@
-package base;
+package base.appControllerModel;
 
-import base.PageWrapper;
 import com.microsoft.playwright.*;
 
 import java.util.*;

@@ -1,4 +1,4 @@
-package base;
+package base.appControllerModel;
 
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
