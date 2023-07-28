@@ -1,6 +1,6 @@
 package steps.screenContainerModel.base;
 
-import base.ScreenContainers;
+import base.Applications;
 import com.microsoft.playwright.*;
 
 import java.util.function.Supplier;
@@ -18,18 +18,19 @@ import java.util.function.Supplier;
 
 public class StepsMultipleBrowsers {
 
-    protected ScreenContainers app;
+    protected Applications apps;
     protected Supplier<BrowserContext> browser;
     protected Supplier<Page> page;
 
-    public StepsMultipleBrowsers(ScreenContainers app) {
-        this.app = app == null ? new ScreenContainers() : app;
-        browser = app.browser;
-        page = app.page;
+    public StepsMultipleBrowsers(Applications apps) {
+        this.apps = apps == null ? new Applications() : apps;
+        assert apps != null;
+        browser = apps.browser;
+        page = apps.page;
     }
 
     public Playwright playwright() {
-        return app.playwright();
+        return apps.playwright();
     }
 
     public BrowserContext browser() {

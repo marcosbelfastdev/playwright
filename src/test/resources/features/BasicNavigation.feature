@@ -1,31 +1,17 @@
 Feature: Phonebook
 
-  @dev
+  @dev2
   Scenario: Sample
-    Given I start the default browser
+    Given I start a browser
     And navigate to http://www.cnn.com.br/
-    And I start a named browser of type
-      | Second | firefox |
+    And I start the named browser Second
+    And alternate to default browser
     And navigate to http://g1.com.br
-    And I start a named browser of type
-      | Third | chromium |
-    And navigate to http://www.cnn.com.br/
-    And I start a named browser of type
-      | Fourth | firefox |
-    And navigate to http://g1.com.br
-    And I start a named browser of type
-      | Fifth | chromium |
-    And navigate to http://www.cnn.com.br/
-    And I start a named browser of type
-      | Sixth | firefox |
-    And navigate to http://g1.com.br
-    And switch to browser named as Second
-    And navigate to http://www.google.com
-    And switch to the standard browser
+    And alternate to browser Second
+    And navigate to http://theguardian.co.uk
+    And alternate to default browser
     And navigate to http://www.bbc.co.uk
-    #And switch to named browser Fourth
-    And navigate to http://www.microsoft.com
-    #And alternate to default browser
-    #And alternate to the browser named
-    And wait 10000
+    And I start browsers as below
+      | Outra aplicação | chromium |
+      | Mais outra      | firefox  |
 

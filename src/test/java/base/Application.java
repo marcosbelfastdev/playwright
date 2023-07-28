@@ -3,7 +3,7 @@ package base;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 
-public class ScreenContainer {
+public class Application {
 
     private BrowserContext browser;
     private Page page;

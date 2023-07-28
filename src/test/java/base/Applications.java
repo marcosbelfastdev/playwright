@@ -1,6 +1,5 @@
 package base;
 
-import base.ScreenContainer;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
@@ -13,14 +12,14 @@ import java.util.function.Supplier;
 
 import static org.junit.Assert.fail;
 
-public class ScreenContainers {
+public class Applications {
 
     private final Playwright playwright;
     private List<Browser> instances;
-    private Map<String, ScreenContainer> appMap = new HashMap<>();
-    private ScreenContainer currentApp = new ScreenContainer();
+    private Map<String, Application> appMap = new HashMap<>();
+    private Application currentApp = new Application();
 
-    public ScreenContainers() {
+    public Applications() {
         playwright = Playwright.create();
     }
 
@@ -29,7 +28,7 @@ public class ScreenContainers {
     public Supplier<Page> page = () -> currentApp.page();
 
     public void registerApp(String name, Browser instance, BrowserContext browser, Page page) {
-        ScreenContainer app = new ScreenContainer();
+        Application app = new Application();
         app.set(name, browser, page);
         try {
             appMap.put(name, app);
@@ -44,7 +43,7 @@ public class ScreenContainers {
         }
     }
 
-    public void switchApp(String name) {
+    public void select(String name) {
         try {
             currentApp = appMap.get(name);
         } catch (Exception e) {
@@ -58,6 +57,10 @@ public class ScreenContainers {
 
     public Browser getCurrentInstance() {
         return currentApp.page().context().browser();
+    }
+
+    public BrowserContext browser() {
+        return browser.get();
     }
 
     public Browser getInstanceByBrowser(String browserType) {
