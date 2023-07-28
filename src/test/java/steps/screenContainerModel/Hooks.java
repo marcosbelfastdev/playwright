@@ -12,10 +12,4 @@ public class Hooks {
 
 
 
-    @BeforeAll
-    public void setup(Scenario scenario) {
-
-    }
-
-
 }

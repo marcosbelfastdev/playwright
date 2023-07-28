@@ -92,11 +92,6 @@ public class StepsAppControllerModel {
         app.newPage("default");
     }
 
-    @And("navigate to (.*)$")
-    public void navigateToUrl(String url) {
-        app.page().navigate(url);
-    }
-
     @And("switch to the standard browser")
     public void switchToBrowser() {
         app.switchToContext("default");

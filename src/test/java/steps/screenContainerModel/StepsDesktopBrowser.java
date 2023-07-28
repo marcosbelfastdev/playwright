@@ -1,77 +1,76 @@
 package steps.screenContainerModel;
 
 import base.screenContainerModel.ScreenContainer;
+import base.screenContainerModel.ScreenContainers;
 import com.microsoft.playwright.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
-public class StepsDesktopBrowser extends Hooks {
+/*
+    Este modelo torna a evolução dos testes mais escalonável porque
+    possibilita fácil agregação de novos browsers, contextos (apps),
+    não limitando a automação a apenas um único browser.
 
-    ScreenContainer app;
-    ScreenContainer app1;
-    ScreenContainer app2;
+    Esta classe de steps pode ser utilizada somente para lidar com a troca de contextos,
+    inicialização de contextos etc., mas poderia ser utilizada somente com o parâmetro apps
+    no construtor.
+    As demais classes utilizariam apenas o objeto 'page'.
+ */
 
-    Playwright playwright;
+public class StepsDesktopBrowser extends StepsMultipleBrowsers {
 
-    public void setApp(ScreenContainer app) {
-        this.app = app;
-    }
-
-    public void switchToApp(String name) {
-        ScreenContainer app = null;
-        if (app1.name.equals(name))
-            app = app1;
-        if (app2.name.equals(name))
-            app = app2;
-        this.app = app;
-    }
-
-    public StepsDesktopBrowser(ScreenContainer app) {
-        this.app = app;
+    public StepsDesktopBrowser(ScreenContainers app) {
+        super(app);
     }
 
     @Given("^I start the named browser (.*)")
-    public void startStandardBrowser(String browserName) {
-
-        switchToApp(browserName);
-
+    public void startNamedBrowser(String browserName) {
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions();
         List<String> args = new ArrayList<>();
         args.add("--disable-web-security");
         args.add("--disable-features=IsolateOrigins,site-per-process");
         launchOptions.setArgs(args);
-        playwright = Playwright.create();
-        app.setInstance(instance);
-        app.setBrowser(instance.newContext());
-        app.setPage(browser.newPage());
+        launchOptions.setHeadless(false);
+        Browser browser = playwright.chromium().launch(launchOptions);
+        BrowserContext context = browser.newContext();
+        Page page = context.newPage();
+        app.registerApp(browserName, browser, context, page);
+
     }
 
-    @Given("^I start the named browser (.*)")
-    public void startStandardBrowser(String browserName) {
-
-        switchToApp(browserName);
-
+    @Given("^I start a browser")
+    public void startStandardBrowser() {
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions();
         List<String> args = new ArrayList<>();
         args.add("--disable-web-security");
         args.add("--disable-features=IsolateOrigins,site-per-process");
         launchOptions.setArgs(args);
-        playwright = Playwright.create();
-        app.setInstance(instance);
-        app.setBrowser(instance.newContext());
-        app.setPage(browser.newPage());
+        launchOptions.setHeadless(false);
+        Browser browser = playwright.chromium().launch(launchOptions);
+        BrowserContext context = browser.newContext();
+        Page page = context.newPage();
+        app.registerApp("default", browser, context, page);
     }
 
     @And("^alternate to browser (.*)")
     public void alternateToNamedBrowser(String browserName) {
-        switchToApp(browserName);
-        app.page().bringToFront();
+        app.switchApp(browserName);
     }
 
+    @And("^alternate to default browser")
+    public void alternateToNamedBrowser() {
+        app.switchApp("default");
 
+    }
+
+    @And("navigate to (.*)$")
+    public void navigateToUrl(String url) {
+        page().navigate(url);
+    }
 
 }
 
