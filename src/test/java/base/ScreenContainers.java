@@ -1,11 +1,11 @@
-package base.screenContainerModel;
+package base;
 
+import base.ScreenContainer;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
-import org.junit.Test;
+import com.microsoft.playwright.Playwright;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,13 +15,18 @@ import static org.junit.Assert.fail;
 
 public class ScreenContainers {
 
+    private final Playwright playwright;
     private List<Browser> instances;
     private Map<String, ScreenContainer> appMap = new HashMap<>();
     private ScreenContainer currentApp = new ScreenContainer();
 
     public ScreenContainers() {
-
+        playwright = Playwright.create();
     }
+
+    public Supplier<Browser> instance = () -> currentApp.page().context().browser();
+    public Supplier<BrowserContext> browser = () -> currentApp.browser();
+    public Supplier<Page> page = () -> currentApp.page();
 
     public void registerApp(String name, Browser instance, BrowserContext browser, Page page) {
         ScreenContainer app = new ScreenContainer();
@@ -47,6 +52,10 @@ public class ScreenContainers {
         }
     }
 
+    public Playwright playwright() {
+        return playwright;
+    }
+
     public Browser getCurrentInstance() {
         return currentApp.page().context().browser();
     }
@@ -62,17 +71,6 @@ public class ScreenContainers {
 
     public List<Browser> getAllInstances() {
         return instances;
-    }
-
-    public Supplier<BrowserContext> browser = this::browser;
-    public Supplier<Page> page = this::page;
-
-    public BrowserContext browser() {
-        return currentApp.browser();
-    }
-
-    public Page page() {
-        return currentApp.page();
     }
 
 }

@@ -1,12 +1,8 @@
-package steps.screenContainerModel;
+package steps.screenContainerModel.base;
 
-import base.screenContainerModel.ScreenContainers;
+import base.ScreenContainers;
 import com.microsoft.playwright.*;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Supplier;
 
 /*
@@ -25,8 +21,6 @@ public class StepsMultipleBrowsers {
     protected ScreenContainers app;
     protected Supplier<BrowserContext> browser;
     protected Supplier<Page> page;
-    protected Playwright playwright = Playwright.create();
-
 
     public StepsMultipleBrowsers(ScreenContainers app) {
         this.app = app == null ? new ScreenContainers() : app;
@@ -34,12 +28,16 @@ public class StepsMultipleBrowsers {
         page = app.page;
     }
 
-    public Page page() {
-        return page.get();
+    public Playwright playwright() {
+        return app.playwright();
     }
 
     public BrowserContext browser() {
         return browser.get();
+    }
+
+    public Page page() {
+        return page.get();
     }
 
 }

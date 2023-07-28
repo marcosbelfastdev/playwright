@@ -1,14 +1,13 @@
 package steps.screenContainerModel;
 
-import base.screenContainerModel.ScreenContainer;
-import base.screenContainerModel.ScreenContainers;
+import base.ScreenContainers;
 import com.microsoft.playwright.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import steps.screenContainerModel.base.StepsMultipleBrowsers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 /*
     Este modelo torna a evolução dos testes mais escalonável porque
@@ -21,9 +20,9 @@ import java.util.function.Supplier;
     As demais classes utilizariam apenas o objeto 'page'.
  */
 
-public class StepsDesktopBrowser extends StepsMultipleBrowsers {
+public class Steps extends StepsMultipleBrowsers {
 
-    public StepsDesktopBrowser(ScreenContainers app) {
+    public Steps(ScreenContainers app) {
         super(app);
     }
 
@@ -35,11 +34,10 @@ public class StepsDesktopBrowser extends StepsMultipleBrowsers {
         args.add("--disable-features=IsolateOrigins,site-per-process");
         launchOptions.setArgs(args);
         launchOptions.setHeadless(false);
-        Browser browser = playwright.chromium().launch(launchOptions);
+        Browser browser = app.playwright().chromium().launch(launchOptions);
         BrowserContext context = browser.newContext();
         Page page = context.newPage();
         app.registerApp(browserName, browser, context, page);
-
     }
 
     @Given("^I start a browser")
@@ -50,7 +48,7 @@ public class StepsDesktopBrowser extends StepsMultipleBrowsers {
         args.add("--disable-features=IsolateOrigins,site-per-process");
         launchOptions.setArgs(args);
         launchOptions.setHeadless(false);
-        Browser browser = playwright.chromium().launch(launchOptions);
+        Browser browser = app.playwright().chromium().launch(launchOptions);
         BrowserContext context = browser.newContext();
         Page page = context.newPage();
         app.registerApp("default", browser, context, page);
@@ -62,9 +60,8 @@ public class StepsDesktopBrowser extends StepsMultipleBrowsers {
     }
 
     @And("^alternate to default browser")
-    public void alternateToNamedBrowser() {
+    public void alternateToDefaultBrowser() {
         app.switchApp("default");
-
     }
 
     @And("navigate to (.*)$")

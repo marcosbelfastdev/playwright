@@ -1,13 +1,7 @@
-package base.screenContainerModel;
+package base;
 
-import base.appControllerModel.PageWrapper;
-import com.microsoft.playwright.*;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static java.util.Objects.isNull;
-import static org.junit.Assert.fail;
+import com.microsoft.playwright.BrowserContext;
+import com.microsoft.playwright.Page;
 
 public class ScreenContainer {
 
