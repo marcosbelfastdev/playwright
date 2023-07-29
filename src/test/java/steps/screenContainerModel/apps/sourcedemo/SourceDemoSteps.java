@@ -12,19 +12,24 @@ import steps.screenContainerModel.base.BaseWebSteps;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class SourceDemoSteps extends BaseWebSteps {
 
-    LoginPage loginPage = new LoginPage(page());
+    final LoginPage loginPage = new LoginPage(page);
 
     public SourceDemoSteps(Applications apps) {
         super(apps);
     }
 
-    @Given("fill {string} in {string}")
-    public void fillElement(String text, String element) {
-        loginPage.locator(element).fill(text);
+    @Given("Using browser {string}, log in to the application as {string} and password {string}")
+    public void fillElement(String browserName, String user, String password) {
+        apps.select(browserName);
+        loginPage.login(user, password);
     }
+
+
 
 }
 

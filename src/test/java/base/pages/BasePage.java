@@ -9,10 +9,14 @@ import java.util.function.Supplier;
 
 public class BasePage {
 
-    protected Page page;
+    protected Supplier<Page> page;
     protected Map<String, Supplier<Locator>> locatorMap = new HashMap<>();
 
-    public BasePage(Page page) {
+    public BasePage(Supplier<Page> page) {
         this.page = page;
+    }
+
+    public Page page() {
+        return this.page.get();
     }
 }

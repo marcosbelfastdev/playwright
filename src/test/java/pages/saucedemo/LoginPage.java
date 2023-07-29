@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 
 public class LoginPage extends BasePage {
 
-    public LoginPage(Page page) {
+    public LoginPage(Supplier<Page> page) {
         super(page);
         init();
     }
@@ -24,16 +24,15 @@ public class LoginPage extends BasePage {
         );
     }
 
+    public void login(String user, String password) {
+        locator("login").fill(user);
+        locator("password").fill(password);
+    }
+
     public final Locator locator(String name) {
         return locatorMap.get(name).get();
     }
 
-    public final Supplier<Locator> userNameTextbox = () -> this.page.getByPlaceholder("Username");
-
-
-    public final Supplier<Locator> passwordTextbox = () -> this.page.getByRole(
-            AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("password")
-    );
-
-
+    public final Supplier<Locator> userNameTextbox = () -> page().getByPlaceholder("Username");
+    public final Supplier<Locator> passwordTextbox = () -> page().getByPlaceholder("Password");
 }

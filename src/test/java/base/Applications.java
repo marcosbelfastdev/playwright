@@ -76,4 +76,8 @@ public class Applications {
         return instances;
     }
 
+    public String name() {
+        return currentApp.name();
+    }
+
 }

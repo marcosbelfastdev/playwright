@@ -23,4 +23,8 @@ public class Application {
         return this.page;
     }
 
+    public String name() {
+        return this.name;
+    }
+
 }

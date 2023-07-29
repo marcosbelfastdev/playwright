@@ -3,6 +3,7 @@ package steps.screenContainerModel.base;
 import base.Applications;
 import com.microsoft.playwright.*;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class BaseWebSteps {
@@ -10,6 +11,7 @@ public class BaseWebSteps {
     protected Applications apps;
     protected Supplier<BrowserContext> browser;
     protected Supplier<Page> page;
+    protected Map<String, Object> pageObjects;
 
     public BaseWebSteps(Applications apps) {
         this.apps = apps == null ? new Applications() : apps;
