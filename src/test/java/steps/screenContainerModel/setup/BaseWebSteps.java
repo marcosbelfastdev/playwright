@@ -42,6 +42,12 @@ public class BaseWebSteps extends steps.screenContainerModel.base.BaseWebSteps {
     }
 
     @Given("^I start a browser")
+    /*
+    A highly customisable browser factory can be created:
+    - choose browser by input parameter
+    - choose browser by config file with list of browsers
+    - choose browser by specifying in gherkin (maybe not so good)
+     */
     public void startStandardBrowser() {
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions();
         List<String> args = new ArrayList<>();

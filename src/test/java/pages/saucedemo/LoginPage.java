@@ -3,10 +3,7 @@ package pages.saucedemo;
 import base.pages.BasePage;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
-import com.microsoft.playwright.options.AriaRole;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -20,19 +17,22 @@ public class LoginPage extends BasePage {
     public void init() {
         locatorMap = Map.of(
                 "login", userNameTextbox,
-                "password", passwordTextbox
+                "password", passwordTextbox,
+                "submit button", loginButton
         );
     }
 
     public void login(String user, String password) {
-        locator("login").fill(user);
-        locator("password").fill(password);
+        get("login").fill(user);
+        get("password").fill(password);
+        get("submit button").click();
     }
 
-    public final Locator locator(String name) {
+    protected final Locator get(String name) {
         return locatorMap.get(name).get();
     }
 
     public final Supplier<Locator> userNameTextbox = () -> page().getByPlaceholder("Username");
     public final Supplier<Locator> passwordTextbox = () -> page().getByPlaceholder("Password");
+    public final Supplier<Locator> loginButton = () -> page().locator("#login-button");
 }

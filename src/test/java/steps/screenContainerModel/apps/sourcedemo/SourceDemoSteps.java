@@ -23,12 +23,11 @@ public class SourceDemoSteps extends BaseWebSteps {
         super(apps);
     }
 
-    @Given("Using browser {string}, log in to the application as {string} and password {string}")
+    @Given("Using browser {string}, log in as {string} with password {string}")
     public void fillElement(String browserName, String user, String password) {
         apps.select(browserName);
         loginPage.login(user, password);
     }
-
 
 
 }
