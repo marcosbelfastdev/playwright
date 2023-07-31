@@ -6,8 +6,8 @@ Feature: Start different browser contexts/pages and demonstrate that the page ob
     And navigate to https://www.saucedemo.com
     And I start the named browser Second
     And navigate to https://www.saucedemo.com
-    And Using browser "default", log in as "standard_user" with password "secret_sauce"
-    And Using browser "Second", log in as "problem_user" with password "secret_sauce"
+    And In Source Demo, using browser "default", log in as "standard_user" with password "secret_sauce"
+    And In Source Demo, using browser "Second", log in as "problem_user" with password "secret_sauce"
     And navigate to http://g1.com.br
 
 
