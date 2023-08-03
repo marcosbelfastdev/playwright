@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import static org.junit.Assert.fail;
+
 public class BasePage {
 
     protected Supplier<Page> page;
@@ -33,7 +35,7 @@ public class BasePage {
         try {
             locator = locatorMap.get(name).get();
         } catch (Exception e) {
-
+            fail("Locator is not registered in this page object.");
         }
         return locator;
     }
