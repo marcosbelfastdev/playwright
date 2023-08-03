@@ -9,9 +9,9 @@ public class Application {
     private Page page;
     public String name;
 
-    public void set(String name, BrowserContext browser, Page page) {
+    public void set(String name, Page page) {
         this.name = name;
-        this.browser = browser;
+        this.browser = page.context();
         this.page = page;
     }
 

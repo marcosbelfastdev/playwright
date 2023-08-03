@@ -4,7 +4,9 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import io.cucumber.java.bs.A;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +17,6 @@ import static org.junit.Assert.fail;
 public class Applications {
 
     private final Playwright playwright;
-    private List<Browser> instances;
     private Map<String, Application> appMap = new HashMap<>();
     private Application currentApp = new Application();
 
@@ -27,17 +28,12 @@ public class Applications {
     public Supplier<BrowserContext> browser = () -> currentApp.browser();
     public Supplier<Page> page = () -> currentApp.page();
 
-    public void registerApp(String name, Browser instance, BrowserContext browser, Page page) {
+    public void registerApp(String name, Page page) {
         Application app = new Application();
-        app.set(name, browser, page);
+        app.set(name, page);
         try {
             appMap.put(name, app);
             this.currentApp = app;
-            try {
-                instances.add(browser.browser());
-            } catch (Exception ignore) {
-
-            }
         } catch (Exception e) {
             fail("App registered already.");
         }
@@ -56,7 +52,7 @@ public class Applications {
     }
 
     public Browser getCurrentInstance() {
-        return currentApp.page().context().browser();
+        return page.get().context().browser();
     }
 
     public BrowserContext browser() {
@@ -65,15 +61,20 @@ public class Applications {
 
     public Browser getInstanceByBrowser(String browserType) {
         Browser instance = null;
-        for (Browser browser : instances) {
-            if (browser.browserType().name().equalsIgnoreCase(browserType))
-                instance = browser;
+        for (Application app : appMap.values()) {
+            instance = app.browser().browser();
+            if (instance.browserType().toString().equalsIgnoreCase(browserType))
+                return instance;
         }
         return instance;
     }
 
     public List<Browser> getAllInstances() {
-        return instances;
+        List<Browser> instances = new ArrayList<>();
+        for (Application app : appMap.values()) {
+            instances.add(app.browser().browser());
+        }
+        return  instances;
     }
 
     public String name() {

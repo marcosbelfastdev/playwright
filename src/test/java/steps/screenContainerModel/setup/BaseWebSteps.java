@@ -38,7 +38,7 @@ public class BaseWebSteps extends steps.screenContainerModel.base.BaseWebSteps {
         Browser browser = apps.playwright().chromium().launch(launchOptions);
         BrowserContext context = browser.newContext();
         Page page = context.newPage();
-        apps.registerApp(browserName, browser, context, page);
+        apps.registerApp(browserName, page);
     }
 
     @Given("^I start a browser")
@@ -58,7 +58,7 @@ public class BaseWebSteps extends steps.screenContainerModel.base.BaseWebSteps {
         Browser browser = apps.playwright().chromium().launch(launchOptions);
         BrowserContext context = browser.newContext();
         Page page = context.newPage();
-        apps.registerApp("default", browser, context, page);
+        apps.registerApp("default", page);
     }
 
     @And("^alternate to browser (.*)")
@@ -74,6 +74,15 @@ public class BaseWebSteps extends steps.screenContainerModel.base.BaseWebSteps {
     @And("navigate to (.*)$")
     public void navigateToUrl(String url) {
         page().navigate(url);
+    }
+
+    @And("pause {int} seconds for some quick inspection")
+    public void pauseQuickInspection(Integer time) {
+        try {
+            Thread.sleep(time*1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
