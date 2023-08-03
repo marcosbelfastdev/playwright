@@ -4,7 +4,6 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
-import io.cucumber.java.bs.A;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,20 +27,20 @@ public class Applications {
     public Supplier<BrowserContext> browser = () -> currentApp.browser();
     public Supplier<Page> page = () -> currentApp.page();
 
-    public void registerApp(String name, Page page) {
+    public void registerApp(String alias, Page page) {
         Application app = new Application();
-        app.set(name, page);
+        app.set(alias, page);
         try {
-            appMap.put(name, app);
+            appMap.put(alias, app);
             this.currentApp = app;
         } catch (Exception e) {
             fail("App registered already.");
         }
     }
 
-    public void select(String name) {
+    public void select(String alias) {
         try {
-            currentApp = appMap.get(name);
+            currentApp = appMap.get(alias);
         } catch (Exception e) {
             fail("App has not been registered yet.");
         }
@@ -77,8 +76,8 @@ public class Applications {
         return  instances;
     }
 
-    public String name() {
-        return currentApp.name();
+    public String alias() {
+        return currentApp.alias();
     }
 
 }

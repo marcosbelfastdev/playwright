@@ -7,10 +7,10 @@ public class Application {
 
     private BrowserContext browser;
     private Page page;
-    public String name;
+    public String alias;
 
     public void set(String name, Page page) {
-        this.name = name;
+        this.alias = name;
         this.browser = page.context();
         this.page = page;
     }
@@ -23,8 +23,8 @@ public class Application {
         return this.page;
     }
 
-    public String name() {
-        return this.name;
+    public String alias() {
+        return this.alias;
     }
 
 }

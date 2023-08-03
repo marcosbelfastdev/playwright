@@ -28,7 +28,7 @@ public class BaseWebSteps extends steps.screenContainerModel.base.BaseWebSteps {
     }
 
     @Given("^I start the named browser (.*)")
-    public void startNamedBrowser(String browserName) {
+    public void startNamedBrowser(String alias) {
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions();
         List<String> args = new ArrayList<>();
         args.add("--disable-web-security");
@@ -38,7 +38,7 @@ public class BaseWebSteps extends steps.screenContainerModel.base.BaseWebSteps {
         Browser browser = apps.playwright().chromium().launch(launchOptions);
         BrowserContext context = browser.newContext();
         Page page = context.newPage();
-        apps.registerApp(browserName, page);
+        apps.registerApp(alias, page);
     }
 
     @Given("^I start a browser")
@@ -62,8 +62,8 @@ public class BaseWebSteps extends steps.screenContainerModel.base.BaseWebSteps {
     }
 
     @And("^alternate to browser (.*)")
-    public void alternateToNamedBrowser(String browserName) {
-        apps.select(browserName);
+    public void alternateToNamedBrowser(String alias) {
+        apps.select(alias);
     }
 
     @And("^alternate to default browser")

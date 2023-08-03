@@ -18,8 +18,8 @@ public class BasePage {
         this.page = page;
     }
 
-    protected void register(String name, Supplier<Locator> supplier) {
-        locatorMap.putIfAbsent(name, supplier);
+    protected void register(String alias, Supplier<Locator> supplier) {
+        locatorMap.putIfAbsent(alias, supplier);
     }
 
     protected void register(Map<String, Supplier<Locator>> map) {
@@ -30,10 +30,10 @@ public class BasePage {
         return this.page.get();
     }
 
-    public final Locator get(String name) {
+    public final Locator get(String alias) {
         Locator locator = null;
         try {
-            locator = locatorMap.get(name).get();
+            locator = locatorMap.get(alias).get();
         } catch (Exception e) {
             fail("Locator is not registered in this page object.");
         }
