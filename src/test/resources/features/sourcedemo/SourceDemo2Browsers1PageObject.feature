@@ -15,8 +15,13 @@ Feature: Start different browser contexts/pages and demonstrate that the page ob
     And pause 5 seconds for some quick inspection
     And alternate to browser page Second Browser Main Page
     And navigate to http://g1.com.br
+    And navigate to https://www.saucedemo.com
     And alternate to default browser page
     And navigate to http://www.apple.com.br
+    And I start the named browser page Fourth Browser Page
+    And In Source Demo, using browser page "Second Browser Main Page", log in as "blabla" with password "passworddd"
+    And alternate to browser page Fourth Browser Page
+    And navigate to http://www.mercadolivre.com.br
     And pause 30 seconds for some quick inspection
 
 
