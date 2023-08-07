@@ -26,6 +26,12 @@ public class Pages {
         return pages.get(alias);
     }
 
+    public List<Page> getAllPages() {
+        Set<Page> pageList = new HashSet<>();
+        pageList.addAll(pages.values());
+        return pageList.stream().toList();
+    }
+
     public Playwright playwright() {
         return playwright;
     }

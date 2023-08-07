@@ -55,6 +55,18 @@ public class BaseBrowserWebSteps extends steps.screenContainerModel.base.BaseWeb
         page = pages.get(alias);
     }
 
+    @And("^alternate to a page with title matching regex (.*)")
+    public void alternateToPageMatchingRegex(String regex) {
+        for (Page page : pages.getAllPages()) {
+            if (page.title().matches(regex)) {
+                // ok, supposing only one page will ever match a regex
+                // needs changed
+                this.page = page;
+                break;
+            }
+        }
+    }
+
     @And("^alternate to default browser page")
     public void alternateToDefaultBrowser() {
         page = pages.get("default");
