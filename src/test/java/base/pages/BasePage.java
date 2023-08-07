@@ -11,11 +11,11 @@ import static org.junit.Assert.fail;
 
 public class BasePage {
 
-    protected Supplier<Page> page;
+    protected Supplier<Page> supplierPage;
     protected Map<String, Supplier<Locator>> locatorMap = new HashMap<>();
 
-    public BasePage(Supplier<Page> page) {
-        this.page = page;
+    public BasePage(Supplier<Page> supplierPage) {
+        this.supplierPage = supplierPage;
     }
 
     protected void register(String alias, Supplier<Locator> supplier) {
@@ -26,9 +26,6 @@ public class BasePage {
         locatorMap.putAll(map);
     }
 
-    public Page page() {
-        return this.page.get();
-    }
 
     public final Locator get(String alias) {
         Locator locator = null;

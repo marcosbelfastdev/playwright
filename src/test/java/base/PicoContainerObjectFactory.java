@@ -1,9 +1,11 @@
 package base;
 
+import base.pages.Pages;
 import io.cucumber.core.backend.ObjectFactory;
 import org.picocontainer.DefaultPicoContainer;
 import org.picocontainer.MutablePicoContainer;
-import steps.screenContainerModel.setup.BaseWebSteps;
+import steps.screenContainerModel.apps.sourcedemo.SourceDemoPageModels;
+import steps.screenContainerModel.setup.BaseBrowserWebSteps;
 
 public class PicoContainerObjectFactory implements ObjectFactory {
     private final MutablePicoContainer container = new DefaultPicoContainer();
@@ -12,7 +14,8 @@ public class PicoContainerObjectFactory implements ObjectFactory {
     public void start() {
         // Initialize the PicoContainer and add any necessary dependencies
         // For example, you can add your step definition classes as components to the container.
-        container.addComponent(BaseWebSteps.class);// Replace StepDefinitions with your actual step definitions class.
+        container.addComponent(Pages.class);
+        container.addComponent(SourceDemoPageModels.class);// Replace StepDefinitions with your actual step definitions class.
     }
 
     @Override

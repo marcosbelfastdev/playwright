@@ -1,6 +1,6 @@
 package steps.screenContainerModel.setup;
 
-import base.Applications;
+import base.pages.Pages;
 import com.microsoft.playwright.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -10,24 +10,13 @@ import java.util.List;
 
 import static org.junit.Assert.fail;
 
-/*
-    Este modelo torna a evolução dos testes mais escalonável porque
-    possibilita fácil agregação de novos browsers, contextos (apps),
-    não limitando a automação a apenas um único browser.
+public class BaseBrowserWebSteps extends steps.screenContainerModel.base.BaseWebSteps {
 
-    Esta classe de steps pode ser utilizada somente para lidar com a troca de contextos,
-    inicialização de contextos etc., mas poderia ser utilizada somente com o parâmetro apps
-    no construtor.
-    As demais classes utilizariam apenas o objeto 'page'.
- */
-
-public class BaseWebSteps extends steps.screenContainerModel.base.BaseWebSteps {
-
-    public BaseWebSteps(Applications apps) {
-        super(apps);
+    public BaseBrowserWebSteps(Pages pages) {
+        super(pages);
     }
 
-    @Given("^I start the named browser (.*)")
+    @Given("^I start the named browser page (.*)")
     public void startNamedBrowser(String alias) {
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions();
         List<String> args = new ArrayList<>();
@@ -35,13 +24,13 @@ public class BaseWebSteps extends steps.screenContainerModel.base.BaseWebSteps {
         args.add("--disable-features=IsolateOrigins,site-per-process");
         launchOptions.setArgs(args);
         launchOptions.setHeadless(false);
-        Browser browser = apps.playwright().chromium().launch(launchOptions);
+        Browser browser = pages.playwright().chromium().launch(launchOptions);
         BrowserContext context = browser.newContext();
-        Page page = context.newPage();
-        apps.registerApp(alias, page);
+        page = context.newPage();
+        pages.setPage(alias, page);
     }
 
-    @Given("^I start a browser")
+    @Given("^I start a browser page")
     /*
     A highly customisable browser factory can be created:
     - choose browser by input parameter
@@ -55,31 +44,31 @@ public class BaseWebSteps extends steps.screenContainerModel.base.BaseWebSteps {
         args.add("--disable-features=IsolateOrigins,site-per-process");
         launchOptions.setArgs(args);
         launchOptions.setHeadless(false);
-        Browser browser = apps.playwright().chromium().launch(launchOptions);
+        Browser browser = pages.playwright().chromium().launch(launchOptions);
         BrowserContext context = browser.newContext();
-        Page page = context.newPage();
-        apps.registerApp("default", page);
+        page = context.newPage();
+        pages.setPage("default", page);
     }
 
-    @And("^alternate to browser (.*)")
+    @And("^alternate to browser page (.*)")
     public void alternateToNamedBrowser(String alias) {
-        apps.select(alias);
+        page = pages.get(alias);
     }
 
-    @And("^alternate to default browser")
+    @And("^alternate to default browser page")
     public void alternateToDefaultBrowser() {
-        apps.select("default");
+        page = pages.get("default");
     }
 
     @And("navigate to (.*)$")
     public void navigateToUrl(String url) {
-        page().navigate(url);
+        page.navigate(url);
     }
 
     @And("pause {int} seconds for some quick inspection")
     public void pauseQuickInspection(Integer time) {
         try {
-            Thread.sleep(time*1000);
+            Thread.sleep(time * 1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

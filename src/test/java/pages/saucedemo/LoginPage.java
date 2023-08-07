@@ -1,19 +1,16 @@
 package pages.saucedemo;
 
 import base.pages.BasePage;
-import base.pages.Element;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 import java.util.Map;
 import java.util.function.Supplier;
 
-import static java.util.Objects.isNull;
-
 public class LoginPage extends BasePage {
 
-    public LoginPage(Supplier<Page> page) {
-        super(page);
+    public LoginPage(Supplier<Page> supplierPage) {
+        super(supplierPage);
         init();
     }
 
@@ -26,14 +23,14 @@ public class LoginPage extends BasePage {
         );
     }
 
-    public Supplier<Locator> userNameTextbox = () -> page().getByPlaceholder("Username");
-    public Supplier<Locator> passwordTextbox = () -> page().getByPlaceholder("Password");
-    public Supplier<Locator> loginButton = () -> page().locator("#login-button");
+    public Supplier<Locator> userNameTextbox = () -> supplierPage.get().getByPlaceholder("Username");
+    public Supplier<Locator> passwordTextbox = () -> supplierPage.get().getByPlaceholder("Password");
+    public Supplier<Locator> loginButton = () -> supplierPage.get().locator("#login-button");
 
     public LoginPage login(String user, String password) {
         get("login").fill(user);
         get("password").fill(password);
-        get("login button").click();
+        //get("login button").click();
         return this;
     }
 
