@@ -22,7 +22,6 @@
         <cucumber.version>1.2.4</cucumber.version>
         <maven.compiler.version>3.8.1</maven.compiler.version>
         <commons.lang3.version>3.4</commons.lang3.version>
-        <jagacy.version>4.2.3</jagacy.version>
     </properties>
 
     <dependencies>
