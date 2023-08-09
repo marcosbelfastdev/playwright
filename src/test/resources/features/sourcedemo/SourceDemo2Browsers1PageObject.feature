@@ -24,4 +24,25 @@ Feature: Start different browser contexts/pages and demonstrate that the page ob
     And navigate to http://www.mercadolivre.com.br
     And pause 30 seconds for some quick inspection
 
+  @sourcedemo2
+  Scenario: Sample
+    Given I start a browser page
+    And navigate to https://www.saucedemo.com
+    And pause 1 seconds for some quick inspection
+    And I start the named browser page Second Browser Main Page
+    And navigate to https://www.cnn.com.br
+    And pause 1 seconds for some quick inspection
+    And alternate to browser page Second Browser Main Page
+    And navigate to http://g1.com.br
+    And navigate to https://www.saucedemo.com
+    And alternate to default browser page
+    And navigate to http://www.apple.com.br
+    And alternate to browser page Second Browser Main Page
+    And navigate to https://www.google.com
+    And alternate to default browser page
+    And navigate to https://www.google.com
+    And pause 30 seconds for some quick inspection
+
+
+
 

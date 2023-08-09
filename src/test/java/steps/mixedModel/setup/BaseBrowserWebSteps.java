@@ -1,4 +1,4 @@
-package steps.screenContainerModel.setup;
+package steps.mixedModel.setup;
 
 import base.pages.Pages;
 import com.microsoft.playwright.*;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.fail;
 
-public class BaseBrowserWebSteps extends steps.screenContainerModel.base.BaseWebSteps {
+public class BaseBrowserWebSteps extends steps.mixedModel.base.BaseWebSteps {
 
     public BaseBrowserWebSteps(Pages pages) {
         super(pages);

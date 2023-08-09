@@ -1,7 +1,6 @@
-package steps.screenContainerModel.apps.sourcedemo;
+package steps.mixedModel.apps.sourcedemo.pages;
 
 import com.microsoft.playwright.Page;
-import pages.saucedemo.LoginPage;
 
 import java.util.function.Supplier;
 

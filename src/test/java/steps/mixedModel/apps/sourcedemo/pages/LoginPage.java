@@ -1,4 +1,4 @@
-package pages.saucedemo;
+package steps.mixedModel.apps.sourcedemo.pages;
 
 import base.pages.BasePage;
 import com.microsoft.playwright.Locator;

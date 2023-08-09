@@ -1,9 +1,7 @@
-package steps.screenContainerModel.base;
+package steps.mixedModel.base;
 
 import base.pages.Pages;
 import com.microsoft.playwright.*;
-
-import java.lang.reflect.InvocationTargetException;
 
 public class BaseWebSteps {
 
