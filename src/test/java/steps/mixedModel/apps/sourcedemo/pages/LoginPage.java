@@ -9,8 +9,8 @@ import java.util.function.Supplier;
 
 public class LoginPage extends BasePage {
 
-    public LoginPage(Supplier<Page> supplierPage) {
-        super(supplierPage);
+    public LoginPage(Supplier<Page> pageSupplier) {
+        super(pageSupplier);
         init();
     }
 
@@ -23,9 +23,9 @@ public class LoginPage extends BasePage {
         );
     }
 
-    public Supplier<Locator> userNameTextbox = () -> supplierPage.get().getByPlaceholder("Username");
-    public Supplier<Locator> passwordTextbox = () -> supplierPage.get().getByPlaceholder("Password");
-    public Supplier<Locator> loginButton = () -> supplierPage.get().locator("#login-button");
+    public Supplier<Locator> userNameTextbox = () -> pageSupplier.get().getByPlaceholder("Username");
+    public Supplier<Locator> passwordTextbox = () -> pageSupplier.get().getByPlaceholder("Password");
+    public Supplier<Locator> loginButton = () -> pageSupplier.get().locator("#login-button");
 
     public LoginPage login(String user, String password) {
         get("login").fill(user);

@@ -14,7 +14,7 @@ public class PicoContainerObjectFactory implements ObjectFactory {
         // Initialize the PicoContainer and add any necessary dependencies
         // For example, you can add your step definition classes as components to the container.
         container.addComponent(Pages.class);
-        container.addComponent(SourceDemoPageModels.class);// Replace StepDefinitions with your actual step definitions class.
+        //container.addComponent(SourceDemoPageModels.class);// Replace StepDefinitions with your actual step definitions class.
     }
 
     @Override
