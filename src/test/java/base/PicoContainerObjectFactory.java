@@ -4,7 +4,6 @@ import base.pages.Pages;
 import io.cucumber.core.backend.ObjectFactory;
 import org.picocontainer.DefaultPicoContainer;
 import org.picocontainer.MutablePicoContainer;
-import steps.mixedModel.apps.sourcedemo.pages.SourceDemoPageModels;
 
 public class PicoContainerObjectFactory implements ObjectFactory {
     private final MutablePicoContainer container = new DefaultPicoContainer();

@@ -4,12 +4,12 @@ import com.microsoft.playwright.Page;
 
 import java.util.function.Supplier;
 
-public class SourceDemoPageModels {
+public class SauceDemoPageModels {
 
     private final Supplier<Page> supplierPage;
 
-    public SourceDemoPageModels(Supplier<Page> supplierPage) {
-        this.supplierPage = supplierPage;
+    public SauceDemoPageModels(Supplier<Page> pageSupplier) {
+        this.supplierPage = pageSupplier;
         initModels();
     }
 
