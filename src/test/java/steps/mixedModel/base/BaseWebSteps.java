@@ -1,6 +1,6 @@
 package steps.mixedModel.base;
 
-import base.pages.Pages;
+import web.base.pages.Pages;
 import com.microsoft.playwright.*;
 
 public class BaseWebSteps {

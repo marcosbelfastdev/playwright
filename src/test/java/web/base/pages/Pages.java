@@ -1,9 +1,8 @@
-package base.pages;
+package web.base.pages;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
-import io.cucumber.java.hu.Ha;
 
 import java.util.*;
 

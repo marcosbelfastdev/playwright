@@ -1,6 +1,6 @@
 package steps.mixedModel.apps.sourcedemo.pages;
 
-import base.pages.BasePage;
+import web.base.pages.BasePage;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 

@@ -1,6 +1,6 @@
 package steps.mixedModel.apps.sourcedemo.steps;
 
-import base.pages.Pages;
+import web.base.pages.Pages;
 import io.cucumber.java.en.Given;
 import steps.mixedModel.apps.sourcedemo.pages.SauceDemoPageModels;
 import steps.mixedModel.base.BaseWebSteps;

@@ -1,6 +1,6 @@
-package base;
+package web.base;
 
-import base.pages.Pages;
+import web.base.pages.Pages;
 import io.cucumber.core.backend.ObjectFactory;
 import org.picocontainer.DefaultPicoContainer;
 import org.picocontainer.MutablePicoContainer;
