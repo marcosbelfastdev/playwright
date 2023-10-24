@@ -5,9 +5,7 @@ import io.cucumber.java.en.Given;
 import steps.mixedModel.apps.sourcedemo.pages.SauceDemoPageModels;
 import steps.mixedModel.base.BaseWebSteps;
 
-@SuppressWarnings("unchecked")
 public class SauceDemoSteps2 extends BaseWebSteps {
-
 
     protected final SauceDemoPageModels model = new SauceDemoPageModels(() -> page);
 

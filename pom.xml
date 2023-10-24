@@ -17,7 +17,7 @@
     </developers>
 
     <properties>
-        <java.version>19</java.version>
+        <java.version>21</java.version>
         <junit.version>4.12</junit.version>
         <cucumber.version>1.2.4</cucumber.version>
         <maven.compiler.version>3.8.1</maven.compiler.version>
@@ -87,8 +87,8 @@
                 <version>${maven.compiler.version}</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>19</source>
+                    <target>19</target>
                     <compilerArgument>-Werror</compilerArgument>
                 </configuration>
             </plugin>

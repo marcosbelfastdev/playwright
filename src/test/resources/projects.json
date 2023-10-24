@@ -1,0 +1,44 @@
+[
+  {
+    "project": "SauceDemo App Config 1",
+    "start": false,
+    "browsers": [
+      {
+        "name": "default",
+        "type": "chromium",
+        "headed": true
+      },
+      {
+        "name": "second",
+        "type": "firefox",
+        "headed": true
+      },
+      {
+        "name": "third",
+        "type": "safari",
+        "headed": true
+      }
+    ]
+  },
+  {
+    "project": "SauceDemo App Config 2",
+    "start": false,
+    "browsers": [
+      {
+        "name": "default",
+        "type": "firefox",
+        "headed": true
+      },
+      {
+        "name": "second",
+        "type": "chromium",
+        "headed": true
+      },
+      {
+        "name": "third",
+        "type": "safari",
+        "headed": true
+      }
+    ]
+  }
+]

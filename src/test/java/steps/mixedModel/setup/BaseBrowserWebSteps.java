@@ -16,6 +16,11 @@ public class BaseBrowserWebSteps extends steps.mixedModel.base.BaseWebSteps {
         super(pages);
     }
 
+    @Given("^I start the project named (.*)")
+    public void startProject(String project) {
+
+    }
+
     @Given("^I start the named browser page (.*)")
     public void startNamedBrowser(String alias) {
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions();

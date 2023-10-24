@@ -19,4 +19,8 @@ public class SauceDemoPageModels {
 
     public LoginPage loginPage;
 
+    public void test() {
+
+    }
+
 }
