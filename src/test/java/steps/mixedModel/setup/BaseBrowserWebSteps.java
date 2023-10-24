@@ -1,6 +1,6 @@
 package steps.mixedModel.setup;
 
-import base.pages.Pages;
+import web.base.pages.Pages;
 import com.microsoft.playwright.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
